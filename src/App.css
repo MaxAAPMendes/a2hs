@@ -4,8 +4,25 @@
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 100%;
   pointer-events: none;
+}
+
+.container {
+  background: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+.container > * {
+  margin: auto;
+}
+
+.add-button {
+  background: yellow;
+  color: #000;
+  margin: auto;
 }
 
 
