@@ -1,41 +1,52 @@
 import './App.css';
+import { useRef, useState, useEffect } from "react";
 
 function App() {
-  let deferredPrompt;
-  const addBtn = document.querySelector(".add-button");
-  // addBtn.style.display = "none";
+  const [deferredPrompt, setDeferredPrompt] = useState(null);
+  const beforeInstallPrompt = (event) => {
+    event.preventDefault();
+    setDeferredPrompt(event);
+  };
+  useEffect(() => {
+    console.log("effect rodou");
+    window.addEventListener("beforeinstallprompt", beforeInstallPrompt, true);
+    return () => {
+      window.removeEventListener(
+        "beforeinstallprompt",
+        beforeInstallPrompt,
+        true
+      );
+    };
+  }, []);
 
-  window.addEventListener("beforeinstallprompt", (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    // Update UI to notify the user they can add to home screen
-    addBtn.style.display = "block";
-  
-    addBtn.addEventListener("click", (e) => {
-      // hide our user interface that shows our A2HS button
-      addBtn.style.display = "none";
-      addBtn.style.background = "gray";
-      // Show the prompt
-      deferredPrompt.prompt();
-      // Wait for the user to respond to the prompt
-      deferredPrompt.userChoice.then((choiceResult) => {
+  function install() {
+    console.log("entrou na função install");
+    alert("entrou na função install");
+    if (!deferredPrompt) return;
+    const { prompt } = deferredPrompt;
+    if (prompt) prompt();
+    const { userChoice } = deferredPrompt;
+    if (userChoice) {
+      userChoice.then(choiceResult => {
+        console.log("userChoice");
         if (choiceResult.outcome === "accepted") {
-          console.log("User accepted the A2HS prompt");
-          alert("aceitou");
+          // accepted
+          console.log("aceito");
+          alert("aceito");
         } else {
-          console.log("User dismissed the A2HS prompt");
-          alert("dimiss");
+          // dismissed
+          console.log("não aceito");
+          alert("não aceito");
         }
-        deferredPrompt = null;
+        setDeferredPrompt(null);
       });
-    });
-  });
+    }
+  }
+  
   return (
-    <div class="container">
+    <div className="container">
       <h1 style={{ color: "#fff" }}>Adicionar a area de trabalho</h1>
-      <button class="add-button">Add to home screen</button>
+      <button onClick={install}>Add to home screen</button>
     </div>
   )
 };
