@@ -15,11 +15,19 @@
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "purpose"
     }
   ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "background_color": "#ffffff",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+    "platform": "web",
+    "url": "https://a2hs-five.vercel.app/"
+    }
+]
 }
