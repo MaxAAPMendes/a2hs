@@ -34,7 +34,11 @@ function App() {
     console.log("entrou na função install");
     if (!deferredPrompt) return;
     const { prompt } = deferredPrompt;
-    if (prompt) prompt();
+    if (prompt) {
+      console.log("entrou no bind");
+      prompt.bind(window);
+      deferredPrompt.prompt();
+    };
     const { userChoice } = deferredPrompt;
     if (userChoice) {
       userChoice.then(choiceResult => {
