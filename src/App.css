@@ -10,10 +10,11 @@
 
 .container {
   background: #000;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
   min-height: 50vh;
+  padding: "20px";
 }
 
 .add-button {

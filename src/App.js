@@ -59,8 +59,30 @@ function App() {
   
   return (
     <div className="container">
-      <h1 style={{ color: "#fff" }}>Adicionar a area de trabalho</h1>
-      <button onClick={install}>Add to home screen</button>
+      <h1
+        style={{
+          color: "#fff",
+          margin: "auto",
+          width: "90%",
+          // border: "1px solid red",
+          textAlign: "center"
+        }}>
+          Adicionar atalho à área de trabalho
+      </h1>
+      <button
+        style={{
+          color: "#000",
+          fontWeight: "600",
+          background: "#ffcc00",
+          borderRadius: "6px",
+          border: "1px solid #fff",
+          padding: "10px",
+          margin: "auto",
+        }}
+        onClick={install}
+      >
+        ADICIONAR APP
+      </button>
     </div>
   )
 };
