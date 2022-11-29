@@ -1,7 +1,18 @@
 import './App.css';
-import { useRef, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+
+function registrarServiceWork() {
+  console.log("funcao registrarServiceWork");
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker
+      .register('/sw.js', { scope: '.'})
+      .then(() => console.log('Service Work registrado!!!'))
+      .catch((error) => console.log('Erro ao registrar Service work', error));
+  }
+}
 
 function App() {
+  registrarServiceWork();
   const [deferredPrompt, setDeferredPrompt] = useState(null);
   const beforeInstallPrompt = (event) => {
     event.preventDefault();
@@ -21,7 +32,6 @@ function App() {
 
   function install() {
     console.log("entrou na função install");
-    alert("entrou na função install");
     if (!deferredPrompt) return;
     const { prompt } = deferredPrompt;
     if (prompt) prompt();
@@ -32,7 +42,7 @@ function App() {
         if (choiceResult.outcome === "accepted") {
           // accepted
           console.log("aceito");
-          alert("aceito");
+          alert("app instalado");
         } else {
           // dismissed
           console.log("não aceito");
